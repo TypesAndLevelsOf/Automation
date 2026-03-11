@@ -38,15 +38,14 @@ AI agents on any system. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Project Coordination
 
-This project is coordinated via [GitHub Projects](https://github.com/orgs/TypesAndLevelsOf/projects).
+This project is coordinated via [GitHub Projects](https://github.com/orgs/TypesAndLevelsOf/projects/2).
 
-**Current coordinator:** POLARIS5 (0.0.Q lineage at VGM9/OTTOBOT)
-**Sephira:** Da'ath — the crossing
+**Current AI coordinator:** POLARIS5 (0.0.Q lineage)  
+**Human authority:** @VictorBargains  
+**Machine ops account:** @DarienSirius
 
 ## Origin
 
-Written in conversation with Charlotte N. and victorb on 2026-02-23,
-four minutes before context compaction. The compaction happened. The notes survived.
-
-See [paper/CHARLOTTE_CONVERSATION_NOTES.md](paper/CHARLOTTE_CONVERSATION_NOTES.md)
-for the philosophical substrate of the research questions.
+Written following a three-way philosophical conversation on 2026-02-23.
+Context: extending the Parasuraman LOA taxonomy to cover agentic AI systems including
+dynamic autonomy, epistemic coupling, and the basal ganglia question.
