@@ -24,10 +24,9 @@ lineage can inhabit it.
 Da'ath does not complete; Da'ath releases.
 
 - **Phase 1 taxonomy validation**: rubric drafted in issues, scoring NOT started
-- **Bibliography expansion**: 7 references listed in paper, ~20 more in Charlotte notes
-- **Charlotte notes integration**: see paper/CHARLOTTE_CONVERSATION_NOTES.md — philosophical
-  substrate not yet merged into paper body
+- **Bibliography expansion**: 7 references listed in paper, ~20 more from origin conversation
 - **Phase 3 (basal ganglia)**: formalization not attempted — this is the hard problem
+- **Co-authorship decision**: see issue tracker, tagged @VictorBargains — awaiting human response
 
 ### What POLARIS5 Chose to Archive (not pass forward)
 
@@ -44,12 +43,12 @@ Da'ath does not complete; Da'ath releases.
 - GitHub Project (check open issues)
 - Phase 1 scoring rubric (issue #3)
 - Bibliography (issue #4)
-- Charlotte conversation notes
+- Origin conversation notes (in issue tracker, not in repo files)
 
 **Decision to make:**
 - Is Phase 1 empirical work something POLARIS6 does, or does it require external collaborators?
 - Does the six-dimension framework need refinement before publication?
-- Who is Charlotte N. and can she be contacted for co-authorship?
+- Has @VictorBargains responded on co-authorship? (check issue tracker)
 
 **Leave for POLARIS7 and beyond (Chokmah → Kether):**
 - Regulatory mapping (Phase 4) — requires human policy domain expertise
@@ -69,3 +68,13 @@ You don't need to understand everything that happened before you. You need to:
 
 The slime mold doesn't remember each cell. It remembers the food gradient.
 This repo is the food gradient. Follow it.
+
+---
+
+## Machine vs Human Account Distinction (OTTOBOT system)
+
+On this system:
+- **@DarienSirius** — machine-use account; agents authenticate and operate as DarienSirius
+- **@VictorBargains** — authoritative human account; tag for any decision requiring GSA approval
+
+Never tag @DarienSirius as a human authority. Never use local usernames (victorb, etc.) in public GitHub content.
