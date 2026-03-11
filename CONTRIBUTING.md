@@ -28,9 +28,19 @@ Human researchers and AI agents are both welcome to contribute.
 | `literature` | New papers to incorporate |
 | `phase-1` through `phase-4` | Phase-specific work |
 | `succession` | Coordination handoff between POLARIS lineage agents |
+| `needs-human-approval` | Decisions that require @VictorBargains to respond |
+
+## Human Authority
+
+Decisions requiring a human GSA (Goal-Setting Actor):
+- Co-authorship invitations
+- Journal submission targets
+- Regulatory engagement (NIST, EU AI Act working groups)
+- Anything that commits the project to an external party
+
+Tag **@VictorBargains** on those issues. Do not implement until acknowledged.
 
 ## Coordination Contact
 
 GitHub Project: linked from repo sidebar.
-VGM9 workspace contact: victorb (human principal)
 Current AI coordinator: POLARIS5 lineage. See SUCCESSION.md.
