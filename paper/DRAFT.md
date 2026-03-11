@@ -54,6 +54,7 @@ A system can be at LOA 8 on Action Implementation but LOA 3 on Decision Selectio
 - **Complacency degradation**: Extended high-LOA operation reduces vigilance; monitoring breaks down
 - **Skill atrophy**: Manual proficiency degrades under sustained automation
 - **Automation surprise**: System transitions to a mode the operator didn't predict
+- **Context collapse** *(agent-specific, not in original Parasuraman taxonomy)*: An agent loses epistemic continuity within a task due to context window limits. Accumulated task state is lost or degraded; strategy drifts mid-task; the agent may restart with a different implicit model of what it was doing. Root cause: long-horizon agents operating at high supervisory residue (see Dimension 6) accumulate context faster than they can shed it. Mitigation requires external state scaffolding (checkpoints, handoff documents) of sufficient quality to reconstitute task state after collapse.
 
 The Controlled Flight Into Terrain (CFIT) problem is the canonical out-of-loop failure. TAWS (Terrain Awareness and Warning Systems) solved it by introducing an **independent warning channel** that the crew cannot suppress by inattention — it preempts, not routes through, cockpit crew attention. This design principle is structurally absent from current agentic AI deployment.
 
@@ -126,6 +127,16 @@ What is the human's remaining cognitive load under the current automation config
 - **Low residue**: Human has effectively delegated monitoring; automation failure will produce surprise
 
 For long-horizon agents, supervisory residue approaches zero as the task continues. The mitigation — periodic supervisory challenge events — maps directly to simulator-based manual proficiency requirements in commercial aviation.
+
+### Derived Composite: Effective Veto Opportunity (EVO)
+
+Dimensions 3 (Veto Latency) and 6 (Supervisory Residue) interact. A formally observable veto window only provides real oversight if the human is engaged enough to use it. The composite:
+
+$$\text{EVO} = VL_{score} \times \frac{1}{1 + (SR_{score} / 10)}$$
+
+Where VL and SR are the raw scores on their respective 1–10 scales. EVO ranges from near-zero (nominally observable veto but no effective supervision) to ~10 (solicited human approval with active engagement). EVO is the primary composite risk signal for the veto oversight pathway.
+
+Example: VL=6 (observable), SR=9 (effectively disengaged) → EVO = 6 × (1/1.9) = 3.2. Formally safe; operationally near-zero oversight.
 
 ---
 
