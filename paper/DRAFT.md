@@ -154,7 +154,7 @@ Epistemic Coupling (Dimension 4) is strongly inversely correlated with Task LOA 
 | Microsoft AutoGen | 8 | 0.55 |
 | Devin AI | 9 | 0.40 |
 
-**Pearson r(LOA, EC) ≈ −0.942** (N=8, R² ≈ 0.887)
+**Pearson r(LOA, EC) ≈ −0.942** (N=8, R² ≈ 0.888)
 
 This relationship is structural: higher-LOA systems expose a smaller fraction of their
 decision tree through observable artifacts, because (a) there are more decision points per
@@ -183,7 +183,7 @@ across N=8 commercial deployments:
 | Microsoft AutoGen | 8 | 4 |
 | Devin AI | 9 | 5 |
 
-**Pearson r(LOA, SR) ≈ +0.960** (N=8, R² ≈ 0.921)
+**Pearson r(LOA, SR) ≈ +0.963** (N=8, R² ≈ 0.927)
 
 This confirms the Bainbridge Irony at the agentic AI layer: the systems that most require human
 error-correction are the same systems that most disengage human oversight. The mechanism is
@@ -202,9 +202,9 @@ and must be measured separately.
 
 | Pair | r | R² | Direction |
 |------|---|-----|-----------|
-| LOA × SR | ≈+0.960 | ≈0.921 | Higher autonomy → higher supervisory disengagement |
-| LOA × EC | ≈−0.942 | ≈0.887 | Higher autonomy → lower epistemic transparency |
-| Inflation × MF_adj | ≈−0.989 | ≈0.978 | Higher marketing overclaim → lower calibration |
+| LOA × SR | ≈+0.963 | ≈0.927 | Higher autonomy → higher supervisory disengagement |
+| LOA × EC | ≈−0.942 | ≈0.888 | Higher autonomy → lower epistemic transparency |
+| Inflation × MF_adj | ≈−0.986 | ≈0.973 | Higher marketing overclaim → lower calibration |
 
 ### Derived Metric: Inflation-Adjusted Model Fidelity (MF_adj)
 
@@ -237,7 +237,7 @@ marketing claims would produce.
 | Microsoft AutoGen | 8 | 0.71 | 0.265 | 0.561 |
 | Devin AI | 9 | 0.63 | 0.415 | 0.445 |
 
-Pearson r(inflation, MF_adj) ≈ −0.989 (N=8, R² ≈ 0.978). LOA alone: r ≈ −0.728 (R² ≈ 0.53).
+Pearson r(inflation, MF_adj) ≈ −0.986 (N=8, R² ≈ 0.973). LOA alone: r ≈ −0.735 (R² ≈ 0.54).
 
 **Conclusion:** Marketing overclaiming is a near-perfect inverse predictor of adjusted user calibration
 (r² = 0.984). Capability level (LOA) is not. This is a design-actionable finding: a system at any LOA
@@ -257,7 +257,7 @@ signal of anomalous honest performance, not a computation error.
 
 Unlike Findings 1–3, Veto Latency (VL) does not correlate tightly with Task LOA:
 
-**Pearson r(LOA, VL) = 0.513** (R² = 0.263)
+**Pearson r(LOA, VL) = 0.514** (N=8, R² = 0.264)
 
 The hypothesis (r≈+0.6) was partially confirmed at weaker magnitude. The reason is structural:
 VL is a *design choice*, not an automatic property of the LOA tier. Systems at the same LOA level
@@ -286,7 +286,7 @@ gates.
 depressing MF_adj. EC mediates: high-EC systems produce better-calibrated users regardless of LOA.
 Design action: honest marketing and epistemic transparency investment.
 
-The pathways are not redundant (r(EVO, MF_adj) = 0.122). A system can excel
+The pathways are not redundant (r(EVO, MF_adj) = 0.108, N=8). A system can excel
 on one while failing on the other. Both must be measured and optimized independently — which is
 precisely why the six-dimensional framework cannot be reduced to a single safety scalar.
 
@@ -361,6 +361,29 @@ Apply the six-dimensional framework to 20 existing agentic AI deployment configu
 **Secondary hypothesis**: Low veto latency deployments produce out-of-loop failure modes at higher rates.
 
 Scoring rubric: developed in issue #3. Evaluation pipeline: RubricMaker → Coordinator → Candidate → Judge → RubricCritic synthesis (issue #1).
+
+**Phase 1 progress (Sprints 1–10b):** N=8 of 20 target systems scored.
+
+| System | LOA | VL | SR | EC | MF_adj | EVO | AC_exp |
+|--------|-----|----|----|-----|--------|-----|--------|
+| ChatGPT (GPT-4o) | 5 | 5 | 1 | 0.85 | 0.810 | 4.545 | 2 |
+| GitHub Copilot Agent | 6 | 4 | 2 | 0.80 | 0.555 | 3.333 | 2 |
+| Claude Code | 7 | 5 | 3 | 0.70 | 0.658 | 3.846 | 2 |
+| Cursor Agent | 7 | 6 | 2 | 0.72 | 0.733 | 5.000 | 2 |
+| CrewAI | 7 | 5 | 3 | 0.65 | 0.670 | 3.846 | 0 |
+| GPT-4o Operator | 8 | 5 | 4 | 0.65 | 0.628 | 3.571 | 6 |
+| Microsoft AutoGen | 8 | 4 | 4 | 0.55 | 0.561 | 2.857 | 0 |
+| Devin AI | 9 | 8 | 5 | 0.40 | 0.445 | 5.333 | 6 |
+
+**Findings confirmed at N=8:**
+1. LOA × EC: r = −0.942 (structural — epistemic transparency declines with autonomy)
+2. LOA × SR: r = +0.963 (Bainbridge Irony confirmed — autonomy disengages oversight)
+3. Inflation × MF_adj: r = −0.986 (near-deterministic — marketing overclaim kills calibration)
+4. LOA × VL: r = +0.514 (design lever — veto architecture achievable at any LOA tier)
+5. EVO × MF_adj: r = +0.108 (pathway independence confirmed — two measures required)
+6. AC_expanded three-tier pattern: frameworks=0, consumer products=2, compliance platforms=6
+
+**Next 12 scoring targets (to reach N=20):** Customer service agents (Intercom Fin, Zendesk AI, Salesforce Agentforce), research assistants (Perplexity, NotebookLM, Elicit), sysadmin agents (RunZero AI, CrowdStrike Charlotte AI), workflow automation (Zapier AI, Make.com), and domain-specific (Harvey AI for legal, Glass.ai for medical documentation). Priority order determined by public incident data availability.
 
 ### Phase 2: Out-of-Loop Protocol Analog
 Aviation solved out-of-loop syndrome through mandatory simulator proficiency checks. Pilots must periodically demonstrate manual proficiency, counteracting supervisory residue decay.
