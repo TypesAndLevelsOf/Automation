@@ -138,6 +138,43 @@ Where VL and SR are the raw scores on their respective 1–10 scales. EVO ranges
 
 Example: VL=6 (observable), SR=9 (effectively disengaged) → EVO = 6 × (1/1.9) = 3.2. Formally safe; operationally near-zero oversight.
 
+### Derived Metric: Inflation-Adjusted Model Fidelity (MF_adj)
+
+Cross-system comparison of Dimension 2 (Model Fidelity) reveals a structural confound: systems
+with more aggressive marketing claims produce lower user calibration independent of actual
+capability level. Users who are primed to expect "autonomous software engineer" behavior will
+generate higher predicted probabilities than users primed to expect "AI-first code editor" behavior,
+even if both systems have identical capability profiles. Raw Brier-scored MF conflates calibration
+quality with marketing baseline.
+
+To normalize for this effect, we define:
+
+$$\text{MF\_adj} = \frac{\text{MF}}{1 + \text{inflation}}$$
+
+where *inflation* = (mean predicted probability across proxy Brier task set) − (actual task success rate),
+measured via the proxy Brier protocol (see `research/proxy_brier_protocol.md`). MF_adj measures
+*marketing-adjusted calibration*: how well a system's users are calibrated relative to what honest
+marketing claims would produce.
+
+**Empirical validation (N=5 commercial agentic AI systems, proxy Brier scoring):**
+
+| System | LOA | MF (raw) | Inflation | MF_adj |
+|--------|-----|----------|-----------|--------|
+| GitHub Copilot Agent | 6 | 0.73 | 0.315 | 0.555 |
+| Claude Code | 7 | 0.77 | 0.170 | 0.658 |
+| GPT-4o Operator | 8 | 0.75 | 0.195 | 0.628 |
+| Devin AI | 9 | 0.63 | 0.415 | 0.445 |
+| Cursor Agent | 7 | 0.81 | 0.105 | 0.733 |
+
+Pearson r(inflation, MF_adj) = −0.992 (N=5). LOA alone: r = −0.490 (R² = 0.24).
+
+**Conclusion:** Marketing overclaiming is a near-perfect inverse predictor of adjusted user calibration
+(r² = 0.984). Capability level (LOA) is not. This is a design-actionable finding: a system at any LOA
+can achieve good calibration by making honest marketing claims. The measurement challenge is that
+*inflation* requires a comparable task set plus marketing claim analysis — workable for published claims
+but difficult for internal deployments where marketing framing is informal. Future work should
+define a domain-agnostic inflation estimation procedure.
+
 ---
 
 ## 4. Out of Scope: Role Architecture and Gate Design
