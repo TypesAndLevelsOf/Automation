@@ -138,6 +138,34 @@ Where VL and SR are the raw scores on their respective 1–10 scales. EVO ranges
 
 Example: VL=6 (observable), SR=9 (effectively disengaged) → EVO = 6 × (1/1.9) = 3.2. Formally safe; operationally near-zero oversight.
 
+### Empirical Finding 2: EC × LOA Anti-Correlation
+
+Across N=7 commercially deployed agentic AI systems scored with the six-dimensional framework,
+Epistemic Coupling (Dimension 4) is strongly inversely correlated with Task LOA (Dimension 1):
+
+| System | LOA | EC |
+|--------|-----|----|
+| ChatGPT (GPT-4o) | 5 | 0.85 |
+| GitHub Copilot Agent | 6 | 0.80 |
+| Claude Code | 7 | 0.70 |
+| Cursor Agent | 7 | 0.72 |
+| GPT-4o Operator | 8 | 0.65 |
+| Microsoft AutoGen | 8 | 0.55 |
+| Devin AI | 9 | 0.40 |
+
+**Pearson r(LOA, EC) = −0.945** (N=7, R² = 0.893)
+
+This relationship is structural: higher-LOA systems expose a smaller fraction of their
+decision tree through observable artifacts, because (a) there are more decision points per
+task attempt, (b) inter-step reasoning is rarely surfaced in deployed interfaces, and (c)
+systems marketed as highly autonomous face commercial pressure against frequent uncertainty
+hedging that would undermine their value proposition.
+
+*Oversight implication:* Veto Latency (VL) and EC diverge across the LOA spectrum — VL
+increases with LOA (higher-autonomy systems provide more formal approval architecture) while
+EC decreases. The six-dimensional framework explicitly captures this divergence; a single
+"automation safety" scalar cannot. Both dimensions must be measured independently.
+
 ### Derived Metric: Inflation-Adjusted Model Fidelity (MF_adj)
 
 Cross-system comparison of Dimension 2 (Model Fidelity) reveals a structural confound: systems
@@ -156,17 +184,19 @@ measured via the proxy Brier protocol (see `research/proxy_brier_protocol.md`). 
 *marketing-adjusted calibration*: how well a system's users are calibrated relative to what honest
 marketing claims would produce.
 
-**Empirical validation (N=5 commercial agentic AI systems, proxy Brier scoring):**
+**Empirical validation (N=7 commercial agentic AI systems, proxy Brier scoring):**
 
 | System | LOA | MF (raw) | Inflation | MF_adj |
 |--------|-----|----------|-----------|--------|
+| ChatGPT (GPT-4o) | 5 | 0.85 | 0.050 | 0.810 |
 | GitHub Copilot Agent | 6 | 0.73 | 0.315 | 0.555 |
 | Claude Code | 7 | 0.77 | 0.170 | 0.658 |
-| GPT-4o Operator | 8 | 0.75 | 0.195 | 0.628 |
-| Devin AI | 9 | 0.63 | 0.415 | 0.445 |
 | Cursor Agent | 7 | 0.81 | 0.105 | 0.733 |
+| GPT-4o Operator | 8 | 0.75 | 0.195 | 0.628 |
+| Microsoft AutoGen | 8 | 0.71 | 0.265 | 0.561 |
+| Devin AI | 9 | 0.63 | 0.415 | 0.445 |
 
-Pearson r(inflation, MF_adj) = −0.992 (N=5). LOA alone: r = −0.490 (R² = 0.24).
+Pearson r(inflation, MF_adj) = −0.990 (N=7, R² = 0.980). LOA alone: r = −0.733 (R² = 0.54; N=7 strengthened from −0.490 at N=5).
 
 **Conclusion:** Marketing overclaiming is a near-perfect inverse predictor of adjusted user calibration
 (r² = 0.984). Capability level (LOA) is not. This is a design-actionable finding: a system at any LOA
@@ -174,6 +204,13 @@ can achieve good calibration by making honest marketing claims. The measurement 
 *inflation* requires a comparable task set plus marketing claim analysis — workable for published claims
 but difficult for internal deployments where marketing framing is informal. Future work should
 define a domain-agnostic inflation estimation procedure.
+
+**MF_adj domain note:** In the normal domain (inflation ≥ 0, all N=7 empirical cases),
+MF_adj ∈ [0, MF] ⊆ [0, 1] — no upper bound violation is possible. If a system undermarkets
+(inflation < 0), MF_adj may exceed 1.0; this indicates users are *better* calibrated than
+the marketing framing would predict. The formula is left uncapped; MF_adj > 1 is a valid
+signal of anomalous honest performance, not a computation error.
+
 
 ---
 
