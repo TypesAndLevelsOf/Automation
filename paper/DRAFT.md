@@ -250,6 +250,43 @@ the marketing framing would predict. The formula is left uncapped; MF_adj > 1 is
 signal of anomalous honest performance, not a computation error.
 
 
+### Empirical Finding 4: LOA × VL — The Design Lever
+
+Unlike Findings 1–3, Veto Latency (VL) does not correlate tightly with Task LOA:
+
+**Pearson r(LOA, VL) = 0.513** (R² = 0.263)
+
+The hypothesis (r≈+0.6) was partially confirmed at weaker magnitude. The reason is structural:
+VL is a *design choice*, not an automatic property of the LOA tier. Systems at the same LOA level
+diverge sharply — Microsoft AutoGen (LOA=8) achieves VL=4 through fully autonomous orchestration,
+while Devin AI (LOA=9) achieves VL=8 through an explicit plan approval gate. Both choices are
+commercially available; one was made, one was not.
+
+This asymmetry is the primary design-actionable finding in the framework:
+
+- **SR (r=+0.964) and EC (r=−0.945) with LOA:** structural, cannot be designed away at high LOA
+- **VL (r=0.513) with LOA:** design-choice, achievable at any LOA tier
+
+The implication: the Effective Veto Opportunity (EVO = VL × 1/(1+SR/10)) can be partially
+recovered at high LOA by investing in VL architecture. SR will still rise, but a high-VL design
+can offset it.
+
+**The Two-Pathway Model:**
+
+The correlation matrix reveals two structurally independent oversight deterioration pathways:
+
+*Pathway 1 (Veto-Residue):* LOA drives SR upward (structural), suppressing EVO. VL is the design
+lever: veto gate investment raises VL and partially restores EVO. Design action: build approval
+gates.
+
+*Pathway 2 (Calibration):* LOA enables more aggressive marketing claims, raising inflation and
+depressing MF_adj. EC mediates: high-EC systems produce better-calibrated users regardless of LOA.
+Design action: honest marketing and epistemic transparency investment.
+
+The pathways are not redundant (r(EVO, MF_adj) = 0.122). A system can excel
+on one while failing on the other. Both must be measured and optimized independently — which is
+precisely why the six-dimensional framework cannot be reduced to a single safety scalar.
+
 ### Supplementary Instrument: AC_expanded Sub-Rubric
 
 Dimension 5 (Accountability Closure, AC) scores cluster at AC=2 across four of seven
