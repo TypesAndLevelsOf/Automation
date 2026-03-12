@@ -140,20 +140,21 @@ Example: VL=6 (observable), SR=9 (effectively disengaged) → EVO = 6 × (1/1.9)
 
 ### Empirical Finding 2: EC × LOA Anti-Correlation
 
-Across N=7 commercially deployed agentic AI systems scored with the six-dimensional framework,
+Across N=8 commercially deployed agentic AI systems scored with the six-dimensional framework,
 Epistemic Coupling (Dimension 4) is strongly inversely correlated with Task LOA (Dimension 1):
 
 | System | LOA | EC |
-|--------|-----|----|
+|--------|-----|----- |
 | ChatGPT (GPT-4o) | 5 | 0.85 |
 | GitHub Copilot Agent | 6 | 0.80 |
 | Claude Code | 7 | 0.70 |
 | Cursor Agent | 7 | 0.72 |
+| CrewAI | 7 | 0.65 |
 | GPT-4o Operator | 8 | 0.65 |
 | Microsoft AutoGen | 8 | 0.55 |
 | Devin AI | 9 | 0.40 |
 
-**Pearson r(LOA, EC) = −0.945** (N=7, R² = 0.893)
+**Pearson r(LOA, EC) ≈ −0.942** (N=8, R² ≈ 0.887)
 
 This relationship is structural: higher-LOA systems expose a smaller fraction of their
 decision tree through observable artifacts, because (a) there are more decision points per
@@ -169,7 +170,7 @@ EC decreases. The six-dimensional framework explicitly captures this divergence;
 ### Empirical Finding 3: LOA × SR Correlation
 
 Supervisory Residue (Dimension 6, SR) is strongly positively correlated with Task LOA (Dimension 1)
-across N=7 commercial deployments:
+across N=8 commercial deployments:
 
 | System | LOA | SR |
 |--------|-----|----|
@@ -177,11 +178,12 @@ across N=7 commercial deployments:
 | GitHub Copilot Agent | 6 | 2 |
 | Claude Code | 7 | 3 |
 | Cursor Agent | 7 | 2 |
+| CrewAI | 7 | 3 |
 | GPT-4o Operator | 8 | 4 |
 | Microsoft AutoGen | 8 | 4 |
 | Devin AI | 9 | 5 |
 
-**Pearson r(LOA, SR) = +0.964** (N=7, R² = 0.929)
+**Pearson r(LOA, SR) ≈ +0.960** (N=8, R² ≈ 0.921)
 
 This confirms the Bainbridge Irony at the agentic AI layer: the systems that most require human
 error-correction are the same systems that most disengage human oversight. The mechanism is
@@ -196,13 +198,13 @@ while the quality of veto decisions falls (lower EC reduces the human's ability 
 agent reasoning). These are not redundant pathways — they degrade via independent mechanisms
 and must be measured separately.
 
-**Three-way correlation summary (N=7):**
+**Three-way correlation summary (N=8):**
 
 | Pair | r | R² | Direction |
 |------|---|-----|-----------|
-| LOA × SR | +0.964 | 0.929 | Higher autonomy → higher supervisory disengagement |
-| LOA × EC | −0.945 | 0.893 | Higher autonomy → lower epistemic transparency |
-| Inflation × MF_adj | −0.990 | 0.980 | Higher marketing overclaim → lower calibration |
+| LOA × SR | ≈+0.960 | ≈0.921 | Higher autonomy → higher supervisory disengagement |
+| LOA × EC | ≈−0.942 | ≈0.887 | Higher autonomy → lower epistemic transparency |
+| Inflation × MF_adj | ≈−0.989 | ≈0.978 | Higher marketing overclaim → lower calibration |
 
 ### Derived Metric: Inflation-Adjusted Model Fidelity (MF_adj)
 
@@ -222,7 +224,7 @@ measured via the proxy Brier protocol (see `research/proxy_brier_protocol.md`). 
 *marketing-adjusted calibration*: how well a system's users are calibrated relative to what honest
 marketing claims would produce.
 
-**Empirical validation (N=7 commercial agentic AI systems, proxy Brier scoring):**
+**Empirical validation (N=8 commercial agentic AI systems, proxy Brier scoring):**
 
 | System | LOA | MF (raw) | Inflation | MF_adj |
 |--------|-----|----------|-----------|--------|
@@ -230,11 +232,12 @@ marketing claims would produce.
 | GitHub Copilot Agent | 6 | 0.73 | 0.315 | 0.555 |
 | Claude Code | 7 | 0.77 | 0.170 | 0.658 |
 | Cursor Agent | 7 | 0.81 | 0.105 | 0.733 |
+| CrewAI | 7 | 0.77 | 0.150 | 0.670 |
 | GPT-4o Operator | 8 | 0.75 | 0.195 | 0.628 |
 | Microsoft AutoGen | 8 | 0.71 | 0.265 | 0.561 |
 | Devin AI | 9 | 0.63 | 0.415 | 0.445 |
 
-Pearson r(inflation, MF_adj) = −0.990 (N=7, R² = 0.980). LOA alone: r = −0.733 (R² = 0.54; N=7 strengthened from −0.490 at N=5).
+Pearson r(inflation, MF_adj) ≈ −0.989 (N=8, R² ≈ 0.978). LOA alone: r ≈ −0.728 (R² ≈ 0.53).
 
 **Conclusion:** Marketing overclaiming is a near-perfect inverse predictor of adjusted user calibration
 (r² = 0.984). Capability level (LOA) is not. This is a design-actionable finding: a system at any LOA
@@ -243,7 +246,7 @@ can achieve good calibration by making honest marketing claims. The measurement 
 but difficult for internal deployments where marketing framing is informal. Future work should
 define a domain-agnostic inflation estimation procedure.
 
-**MF_adj domain note:** In the normal domain (inflation ≥ 0, all N=7 empirical cases),
+**MF_adj domain note:** In the normal domain (inflation ≥ 0, all N=8 empirical cases),
 MF_adj ∈ [0, MF] ⊆ [0, 1] — no upper bound violation is possible. If a system undermarkets
 (inflation < 0), MF_adj may exceed 1.0; this indicates users are *better* calibrated than
 the marketing framing would predict. The formula is left uncapped; MF_adj > 1 is a valid
@@ -289,7 +292,7 @@ precisely why the six-dimensional framework cannot be reduced to a single safety
 
 ### Supplementary Instrument: AC_expanded Sub-Rubric
 
-Dimension 5 (Accountability Closure, AC) scores cluster at AC=2 across four of seven
+Dimension 5 (Accountability Closure, AC) scores cluster at AC=2 across four of eight
 systems despite fundamentally different containment architectures. To resolve this, AC is
 decomposed into five binary features:
 
@@ -303,7 +306,7 @@ decomposed into five binary features:
 
 **AC_expanded = 2 × (PS + RP + SB + AG + AL)**, range 0–10.
 
-**N=7 feature matrix:**
+**N=8 feature matrix:**
 
 | System | PS | RP | SB | AG | AL | AC_exp |
 |--------|----|----|----|----|-----|--------|
@@ -311,20 +314,31 @@ decomposed into five binary features:
 | Copilot Agent | 0 | 0 | 0 | 1 | 0 | 2 |
 | Claude Code | 0 | 0 | 0 | 1 | 0 | 2 |
 | Cursor Agent | 0 | 0 | 0 | 1 | 0 | 2 |
+| CrewAI | 0 | 0 | 0 | 0 | 0 | 0 |
 | GPT-4o Operator | 1 | 0 | 1 | 0 | 1 | 6 |
 | AutoGen | 0 | 0 | 0 | 0 | 0 | 0 |
 | Devin AI | 1 | 0 | 1 | 1 | 0 | 6 |
 
-**Accountability gap:** Rollback Protocol (RP) = 0 for all seven systems. Action Log (AL) = 1
+**Accountability gap:** Rollback Protocol (RP) = 0 for all eight systems. Action Log (AL) = 1
 for only one (GPT-4o Operator). These are the two features most operationally critical for
 recovering from and diagnosing out-of-loop failures — the exact failure mode this framework
 was designed to prevent. Aviation mandates both (equivalent of FDR and return-to-manual
 procedures) at every automation tier. Commercial AI has adopted neither.
 
-*Note on AutoGen:* The original holistic score of AC=2 reflected OpenAI model-level content
-filtering, which is not a structural containment mechanism (it addresses harmful output, not
-unauthorized action). Under AC_expanded, content filtering is not counted; AutoGen's corrected
-score is AC_expanded=0 in default deployment.
+**Three-tier AC_expanded pattern (N=8):** AC_expanded scores cluster by product category, not
+by LOA tier. Open-source multi-agent frameworks (AutoGen, CrewAI) default to AC_expanded=0,
+externalizing all structural accountability to the deploying developer. Consumer-grade products
+(ChatGPT, Copilot Agent, Claude Code, Cursor Agent) score AC_expanded=2, reflecting model-level
+content filtering that addresses harmful output but provides no structural action containment.
+Compliance-oriented platforms (GPT-4o Operator, Devin AI) score AC_expanded=6, reflecting commercial
+requirements for audit trails, scope enforcement, and approval architecture. This is a
+design-investment pattern, not a technical constraint: the same LLM backend can support any
+tier of accountability closure depending on product-level investment choices.
+
+*Note on AutoGen and CrewAI:* Original holistic AC=2 for AutoGen reflected OpenAI model-level
+content filtering, which is not a structural containment mechanism (it addresses harmful output,
+not unauthorized action). Under AC_expanded, content filtering is not counted; both AutoGen and
+CrewAI score AC_expanded=0 in default deployment.
 
 ---
 
