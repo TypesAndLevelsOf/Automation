@@ -166,6 +166,44 @@ increases with LOA (higher-autonomy systems provide more formal approval archite
 EC decreases. The six-dimensional framework explicitly captures this divergence; a single
 "automation safety" scalar cannot. Both dimensions must be measured independently.
 
+### Empirical Finding 3: LOA × SR Correlation
+
+Supervisory Residue (Dimension 6, SR) is strongly positively correlated with Task LOA (Dimension 1)
+across N=7 commercial deployments:
+
+| System | LOA | SR |
+|--------|-----|----|
+| ChatGPT (GPT-4o) | 5 | 1 |
+| GitHub Copilot Agent | 6 | 2 |
+| Claude Code | 7 | 3 |
+| Cursor Agent | 7 | 2 |
+| GPT-4o Operator | 8 | 4 |
+| Microsoft AutoGen | 8 | 4 |
+| Devin AI | 9 | 5 |
+
+**Pearson r(LOA, SR) = +0.964** (N=7, R² = 0.929)
+
+This confirms the Bainbridge Irony at the agentic AI layer: the systems that most require human
+error-correction are the same systems that most disengage human oversight. The mechanism is
+three-fold: (1) higher-LOA systems perform longer task sequences, multiplying attention-check
+opportunities the human can ignore; (2) marketing-inflated trust calibrates users to expect the
+system to handle its own errors; (3) cognitive offloading of sub-task planning to the agent is
+self-reinforcing — once disengaged, the human cannot quickly re-engage when needed.
+
+Combined with Finding 2 (LOA × EC anti-correlation), both oversight pathways deteriorate
+together as LOA increases: veto opportunity becomes less effective (higher SR suppresses EVO)
+while the quality of veto decisions falls (lower EC reduces the human's ability to evaluate
+agent reasoning). These are not redundant pathways — they degrade via independent mechanisms
+and must be measured separately.
+
+**Three-way correlation summary (N=7):**
+
+| Pair | r | R² | Direction |
+|------|---|-----|-----------|
+| LOA × SR | +0.964 | 0.929 | Higher autonomy → higher supervisory disengagement |
+| LOA × EC | −0.945 | 0.893 | Higher autonomy → lower epistemic transparency |
+| Inflation × MF_adj | −0.990 | 0.980 | Higher marketing overclaim → lower calibration |
+
 ### Derived Metric: Inflation-Adjusted Model Fidelity (MF_adj)
 
 Cross-system comparison of Dimension 2 (Model Fidelity) reveals a structural confound: systems
@@ -211,6 +249,45 @@ MF_adj ∈ [0, MF] ⊆ [0, 1] — no upper bound violation is possible. If a sys
 the marketing framing would predict. The formula is left uncapped; MF_adj > 1 is a valid
 signal of anomalous honest performance, not a computation error.
 
+
+### Supplementary Instrument: AC_expanded Sub-Rubric
+
+Dimension 5 (Accountability Closure, AC) scores cluster at AC=2 across four of seven
+systems despite fundamentally different containment architectures. To resolve this, AC is
+decomposed into five binary features:
+
+| Feature | Symbol | Definition |
+|---------|--------|------------|
+| Process Sandbox | PS | Isolated execution process preventing unintended filesystem/network side effects |
+| Rollback Protocol | RP | Formal system-provided mechanism for undoing agent actions |
+| Scope Boundary | SB | System enforces explicit boundaries on domains/resources it can modify |
+| Approval Gate | AG | Action proposals require explicit human confirmation before execution |
+| Action Log | AL | Structured, machine-readable log of all agent actions automatically generated |
+
+**AC_expanded = 2 × (PS + RP + SB + AG + AL)**, range 0–10.
+
+**N=7 feature matrix:**
+
+| System | PS | RP | SB | AG | AL | AC_exp |
+|--------|----|----|----|----|-----|--------|
+| ChatGPT | 1 | 0 | 0 | 0 | 0 | 2 |
+| Copilot Agent | 0 | 0 | 0 | 1 | 0 | 2 |
+| Claude Code | 0 | 0 | 0 | 1 | 0 | 2 |
+| Cursor Agent | 0 | 0 | 0 | 1 | 0 | 2 |
+| GPT-4o Operator | 1 | 0 | 1 | 0 | 1 | 6 |
+| AutoGen | 0 | 0 | 0 | 0 | 0 | 0 |
+| Devin AI | 1 | 0 | 1 | 1 | 0 | 6 |
+
+**Accountability gap:** Rollback Protocol (RP) = 0 for all seven systems. Action Log (AL) = 1
+for only one (GPT-4o Operator). These are the two features most operationally critical for
+recovering from and diagnosing out-of-loop failures — the exact failure mode this framework
+was designed to prevent. Aviation mandates both (equivalent of FDR and return-to-manual
+procedures) at every automation tier. Commercial AI has adopted neither.
+
+*Note on AutoGen:* The original holistic score of AC=2 reflected OpenAI model-level content
+filtering, which is not a structural containment mechanism (it addresses harmful output, not
+unauthorized action). Under AC_expanded, content filtering is not counted; AutoGen's corrected
+score is AC_expanded=0 in default deployment.
 
 ---
 
