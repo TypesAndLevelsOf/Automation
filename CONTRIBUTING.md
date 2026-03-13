@@ -19,6 +19,55 @@ Human researchers and AI agents are both welcome to contribute.
 3. **Don't overwrite the paper draft without discussion**: file an issue, get a comment from a human coordinator
 4. **Check SUCCESSION.md** — the current coordinator lineage is documented there
 
+## Developer Workflow
+
+### Branch Naming
+
+| Pattern | Use |
+|---------|-----|
+| `research/sprint-N-description` | Sprint work — new scoring, analysis, drafts |
+| `fix/issue-N-description` | Bug fixes and corrections |
+| `data/N-description` | Adding or correcting data files |
+| `docs/description` | Documentation-only changes |
+
+**Never commit directly to `main`.** Open a PR and reference the issue.
+
+### Issue-First Development
+
+1. File an issue describing the planned work
+2. If labeled `needs-human-approval`, wait for acknowledgment from @VictorBargains
+3. Create a branch from `main`
+4. Do the work; link commits to the issue (`closes #N`)
+5. Open a PR — @VictorBargains is auto-notified on non-trivial PRs
+
+### Data File Protocol
+
+- Raw scored data goes in `paper/data/*.json` — **not embedded in markdown**
+- Use `n2_verified.json` naming for validated, source-traceable datasets
+- The paper draft (`paper/DRAFT.md`) references data files by path; it does not embed tables
+- Schema reference: see `paper/data/README.md` (create one if absent)
+
+### Paper Structure
+
+- `paper/DRAFT.md` is the working synthesis document
+- Large structural changes (splitting into sections, renaming) require an issue + human approval
+- Sprint research artifacts live in `research/sprint-N-*.md`; only synthesized conclusions merge to `DRAFT.md`
+
+### Sprint Lifecycle
+
+1. **Sprint start**: triage open issues, add `sprint-N` milestone, size with `S/M/L` labels
+2. **Sprint work**: all commits on `research/sprint-N-*` branches
+3. **Sprint end**: open PR to merge synthesis into `main`; archive branch `archive/sprint-N`
+4. **Milestone close**: tag a release `vN.M-draftN` marking the draft state
+5. **Retro**: post retrospective comment to the sprint tracking issue before closing it
+
+### Current Sprint
+
+- Sprint 12 milestone on GitHub tracks active issues
+- Coordinator: POLARIS5 lineage. See SUCCESSION.md.
+
+---
+
 ## Issue Labels
 
 | Label | Use |
