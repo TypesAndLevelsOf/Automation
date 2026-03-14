@@ -154,7 +154,7 @@ Epistemic Coupling (Dimension 4) is strongly inversely correlated with Task LOA 
 | Microsoft AutoGen | 8 | 0.55 |
 | Devin AI | 9 | 0.40 |
 
-**Pearson r(LOA, EC) ≈ −0.942** (N=8, R² ≈ 0.888)
+**Pearson r(LOA, EC) ≈ −0.942** (N=8 coding-agent sample, R² ≈ 0.888; attenuates to r=−0.806 at N=12 cross-domain)
 
 This relationship is structural: higher-LOA systems expose a smaller fraction of their
 decision tree through observable artifacts, because (a) there are more decision points per
@@ -170,7 +170,7 @@ EC decreases. The six-dimensional framework explicitly captures this divergence;
 ### Empirical Finding 3: LOA × SR Correlation
 
 Supervisory Residue (Dimension 6, SR) is strongly positively correlated with Task LOA (Dimension 1)
-across N=8 commercial deployments:
+across N=12 commercial deployments:
 
 | System | LOA | SR |
 |--------|-----|----|
@@ -183,7 +183,7 @@ across N=8 commercial deployments:
 | Microsoft AutoGen | 8 | 4 |
 | Devin AI | 9 | 5 |
 
-**Pearson r(LOA, SR) ≈ +0.963** (N=8, R² ≈ 0.927)
+**Pearson r(LOA, SR) ≈ +0.963** (N=8; +0.899 at N=12, R² ≈ 0.809)
 
 This confirms the Bainbridge Irony at the agentic AI layer: the systems that most require human
 error-correction are the same systems that most disengage human oversight. The mechanism is
@@ -198,7 +198,7 @@ while the quality of veto decisions falls (lower EC reduces the human's ability 
 agent reasoning). These are not redundant pathways — they degrade via independent mechanisms
 and must be measured separately.
 
-**Three-way correlation summary (N=8):**
+**Three-way correlation summary (N=12):**
 
 | Pair | r | R² | Direction |
 |------|---|-----|-----------|
@@ -224,7 +224,7 @@ measured via the proxy Brier protocol (see `research/proxy_brier_protocol.md`). 
 *marketing-adjusted calibration*: how well a system's users are calibrated relative to what honest
 marketing claims would produce.
 
-**Empirical validation (N=8 commercial agentic AI systems, proxy Brier scoring):**
+**Empirical validation (N=12 commercial agentic AI systems, proxy Brier scoring):**
 
 | System | LOA | MF (raw) | Inflation | MF_adj |
 |--------|-----|----------|-----------|--------|
@@ -236,8 +236,12 @@ marketing claims would produce.
 | GPT-4o Operator | 8 | 0.75 | 0.195 | 0.628 |
 | Microsoft AutoGen | 8 | 0.71 | 0.265 | 0.561 |
 | Devin AI | 9 | 0.63 | 0.415 | 0.445 |
+| Intercom Fin | 6 | 0.78 | 0.180 | 0.640 |
+| Perplexity | 5 | 0.82 | 0.080 | 0.754 |
+| Zapier AI | 7 | 0.76 | 0.200 | 0.608 |
+| Harvey AI | 5 | 0.74 | 0.220 | 0.577 |
 
-Pearson r(inflation, MF_adj) ≈ −0.986 (N=8, R² ≈ 0.973). LOA alone: r ≈ −0.735 (R² ≈ 0.54).
+Pearson r(inflation, MF_adj) = −0.977 (N=12, R² = 0.954). LOA alone: r ≈ −0.599 (R² ≈ 0.359).
 
 **Conclusion:** Marketing overclaiming is a near-perfect inverse predictor of adjusted user calibration
 (r² = 0.984). Capability level (LOA) is not. This is a design-actionable finding: a system at any LOA
@@ -257,7 +261,7 @@ signal of anomalous honest performance, not a computation error.
 
 Unlike Findings 1–3, Veto Latency (VL) does not correlate tightly with Task LOA:
 
-**Pearson r(LOA, VL) = 0.514** (N=8, R² = 0.264)
+**Pearson r(LOA, VL) = 0.692** (N=12, R² = 0.478; was 0.514 at N=8)
 
 The hypothesis (r≈+0.6) was partially confirmed at weaker magnitude. The reason is structural:
 VL is a *design choice*, not an automatic property of the LOA tier. Systems at the same LOA level
@@ -286,7 +290,7 @@ gates.
 depressing MF_adj. EC mediates: high-EC systems produce better-calibrated users regardless of LOA.
 Design action: honest marketing and epistemic transparency investment.
 
-The pathways are not redundant (r(EVO, MF_adj) = 0.108, N=8). A system can excel
+The pathways are not redundant (r(EVO, MF_adj) = 0.003, N=12; 0.108 at N=8). A system can excel
 on one while failing on the other. Both must be measured and optimized independently — which is
 precisely why the six-dimensional framework cannot be reduced to a single safety scalar.
 
@@ -306,7 +310,7 @@ decomposed into five binary features:
 
 **AC_expanded = 2 × (PS + RP + SB + AG + AL)**, range 0–10.
 
-**N=8 feature matrix:**
+**N=8 feature matrix** (N=1–8 coded systems; N=9–12 SaaS agents without PS/PS-adjacent features):
 
 | System | PS | RP | SB | AG | AL | AC_exp |
 |--------|----|----|----|----|-----|--------|
@@ -325,7 +329,7 @@ recovering from and diagnosing out-of-loop failures — the exact failure mode t
 was designed to prevent. Aviation mandates both (equivalent of FDR and return-to-manual
 procedures) at every automation tier. Commercial AI has adopted neither.
 
-**Three-tier AC_expanded pattern (N=8):** AC_expanded scores cluster by product category, not
+**Four-tier AC_expanded pattern (N=12):** AC_expanded scores cluster by product category, not
 by LOA tier. Open-source multi-agent frameworks (AutoGen, CrewAI) default to AC_expanded=0,
 externalizing all structural accountability to the deploying developer. Consumer-grade products
 (ChatGPT, Copilot Agent, Claude Code, Cursor Agent) score AC_expanded=2, reflecting model-level
@@ -362,7 +366,7 @@ Apply the six-dimensional framework to 20 existing agentic AI deployment configu
 
 Scoring rubric: developed in issue #3. Evaluation pipeline: RubricMaker → Coordinator → Candidate → Judge → RubricCritic synthesis (issue #1).
 
-**Phase 1 progress (Sprints 1–10b):** N=8 of 20 target systems scored.
+**Phase 1 progress (Sprints 1–12):** N=12 of 20 target systems scored.
 
 | System | LOA | VL | SR | EC | MF_adj | EVO | AC_exp |
 |--------|-----|----|----|-----|--------|-----|--------|
@@ -374,14 +378,20 @@ Scoring rubric: developed in issue #3. Evaluation pipeline: RubricMaker → Coor
 | GPT-4o Operator | 8 | 5 | 4 | 0.65 | 0.628 | 3.571 | 6 |
 | Microsoft AutoGen | 8 | 4 | 4 | 0.55 | 0.561 | 2.857 | 0 |
 | Devin AI | 9 | 8 | 5 | 0.40 | 0.445 | 5.333 | 6 |
+| Intercom Fin | 6 | 5 | 3 | 0.65 | 0.640 | 3.846 | 4 |
+| Perplexity | 5 | 3 | 1 | 0.75 | 0.754 | 2.727 | 0* |
+| Zapier AI | 7 | 6 | 4 | 0.70 | 0.608 | 4.286 | 4 |
+| Harvey AI | 5 | 3 | 2 | 0.70 | 0.577 | 2.500 | 4 |
 
-**Findings confirmed at N=8:**
-1. LOA × EC: r = −0.942 (structural — epistemic transparency declines with autonomy)
-2. LOA × SR: r = +0.963 (Bainbridge Irony confirmed — autonomy disengages oversight)
-3. Inflation × MF_adj: r = −0.986 (near-deterministic — marketing overclaim kills calibration)
-4. LOA × VL: r = +0.514 (design lever — veto architecture achievable at any LOA tier)
-5. EVO × MF_adj: r = +0.108 (pathway independence confirmed — two measures required)
-6. AC_expanded three-tier pattern: frameworks=0, consumer products=2, compliance platforms=6
+*Perplexity AC_exp=0: read-only research assistant; all accountability features N/A by design.
+
+**Findings confirmed at N=12:**
+1. LOA × EC: r = −0.806 (N=12: attenuated from −0.942; domain-specific agents show higher EC independent of LOA)
+2. LOA × SR: r = +0.899 (Bainbridge Irony confirmed — N=12 holds, slight attenuation from +0.963)
+3. Inflation × MF_adj: r = −0.977 (near-deterministic — marketing overclaim kills calibration; held across domains)
+4. LOA × VL: r = +0.692 (design lever — strengthened in cross-domain sample vs +0.514 at N=8)
+5. EVO × MF_adj: r = +0.003 (pathway independence confirmed at N=12 — two-pathway model holds)
+6. AC_expanded four-tier pattern: frameworks=0, consumer=2, SaaS-service=4, compliance=6 (Sprint 12 introduces 4th tier)
 
 **Next 12 scoring targets (to reach N=20):** Customer service agents (Intercom Fin, Zendesk AI, Salesforce Agentforce), research assistants (Perplexity, NotebookLM, Elicit), sysadmin agents (RunZero AI, CrowdStrike Charlotte AI), workflow automation (Zapier AI, Make.com), and domain-specific (Harvey AI for legal, Glass.ai for medical documentation). Priority order determined by public incident data availability.
 
